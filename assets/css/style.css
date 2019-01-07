@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: url(../images/harrypotterwallpaper.jpg);
+    position: static;
+   
+}
+
+.container {
+    font-size: 60px;
+    font-family: 'IM Fell DW Pica', serif;
+    color: white;
+    text-align: center;
+    margin-top: 70px;
+}
+
+
+
+.begin-button {
+    color: black;
+    font-family: 'IM Fell DW Pica', serif;
+    opacity: .8;
+    margin-top: 30px;
+   
+}
+#timeleft, 
+#questionblock {
+    font-size: 25px;
+    text-align: center;
+}
+
+
+#answerblock {
+    border-radius: 5%;
+    color: black;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 20px;
+    background-color: white;
+  
+
+}

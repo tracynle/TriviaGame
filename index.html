@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Harry Potter Trivia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative|IM+Fell+DW+Pica" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/reset.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    
+</head>
+<body>
+    <main class="container">
+        <section class="row">
+            <div class="col-md-12">
+                <h1>Welcome to Hogwarts</h1>
+            </div>
+        </section>
+        <section class="row">
+            <!--Empty column-->
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="jumbotron begin-button">
+                    <div class= "wrapper">
+                        <p class="lead">Test your Harry Potter knowledge!<br>You have a time limit of 30 seconds to answer the trivia questions. <br>Click the button below to begin the challenge. <br>Good luck.</p>
+                        <a class="btn btn-primary btn-lg" id="start-btn" href="#" role="button">Start</a>
+                        <!--Include Restart button-->
+                        <a class="btn btn-primary btn-lg" id="restart-btn" href="#" role="button">Play Again?</a>
+                        <div id="timeleft"></div>
+                        <div id="questionblock"></div>
+                        <div id="answerblock"></div>
+                        <a class="btn btn-primary btn-lg" id="next-btn" href="#" role="button">Next</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </section>
+    </main>
+    
+</body>
+<script src="assets/javascript/app.js"></script>
+    
+
+</html>
