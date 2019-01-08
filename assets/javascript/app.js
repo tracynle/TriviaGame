@@ -1,23 +1,14 @@
 /* 
-
-Create variables for:
--keeping count of correct questions set to zero
--keeping count of wrong questions set to zero
--keeping count of unanswered questions set to zero
--a timer set to 30 seconds
--user's guess/answer they choose
-
-Create functions for:
--Start button to start the game once clicked. Using the .on click event
--to display array questions in a loop with radio buttons using HTML
--Timer to start
--Timer to countdown: will notify how many seconds you have left in increments of 10 until it ends
-
+To Fix:
+- after clicking next question, continue to run timer 
+- Remove the answer/results after User chooses one. (empty)
+- Create border/color highlight for each multiple choice option for readability
+- Timer is not fully set to 0 as it counts down
 */
 var correctCount = 0;
 var wrongCount = 0;
 var unansweredCount = 0;
-var timer = 30;
+var timer = 10;
 var pick;
 var index = 0;
 var holder = [];
@@ -42,7 +33,7 @@ var questions = [
         question: "Where does Moaning Murtle live in Hogwarts?",
         choices: ["in the Chamber of Secrets", "in Hagrid's house", "in the girl's bathroom above the Great Hall", "in the boy's bathroom"],
         answer: 2,
-    // },
+    },
     // {
     //     question: "How did Harry destroy Tom Riddle's diary?",
     //     choices: ["The Sword of Gryffindor", "he pierced it with a Basilisk's fang", "he put a spell on it", "he burned the book"],
@@ -65,19 +56,27 @@ var questions = [
     // },
     // {
     //     question: "Which of the following is not one of Voldemort's horcruxes?",
-    //     choices: ["a. The Sword of Gryffindor", "Nagini", "Tom Riddle's Diary", "Helga Hufflepuff's Cup"],
+    //     choices: ["The Sword of Gryffindor", "Nagini", "Tom Riddle's Diary", "Helga Hufflepuff's Cup"],
     //     answer: 0,
-    // 
-}
+    
+// }
 ];
 var qCount = questions.length;
+var restartGame = function() {
+    // When the 'Restart' button is clicked, reload the page.
+    var restart = $("#restart.btn").click(function() {
+      location.reload();
+    });
+    $("#restart-btn").append(restart);
+
+}
+
 $(document).ready(function() {
-
-
 console.log(questions);
 
 $("#restart-btn").hide();
 $("#next-btn").hide();
+$(".button4").hide();
 $("#next-btn").on("click", displayQuestion);
 
 // Game begins when you click on the 'Start' button
@@ -85,30 +84,42 @@ $("#start-btn").on("click", function() {
     // Once you click, the 'Start' button hides/goes away
     $("#start-btn").hide();
     $(".lead").empty();
-    // Calls this function to display questions in an array for loop
+    // Calls this function to display questions in an array for loop and runs timer
     displayQuestion();
     runTimer();
     for(var i = 0; i < questions.length; i++) {
         holder.push(questions[i]);
     }
+
 })
+
+// runTimer:
+//   start timer at 10
+//   decrease timer every second
 
 function runTimer() {
     if(!running) {
+        timer = 10;
         intervalId = setInterval(decrement, 1000);
         running = true;
     }
+
+    // player will have to click on next button to move onto next question
+    // timer will restart for every qustion.
 }
 
 function decrement() {
-    $("#timeleft").text("Time remaining: " + timer);
     timer--;
+    $("#timeleft").text("Time remaining: " + timer);
+    
 
     if (timer === 0) {
         unansweredCount++;
         stopTimer();
         $("#answerblock").text("Time is up! The correct answer is: " + pick.choices[pick.answer]);
         showResults();
+        $("#restart-btn").show();
+        restartGame();
     }
 }
 
@@ -126,7 +137,9 @@ function displayQuestion() {
 
     // Pick a question in order
     pick = questions[index++];
-
+    
+    // Removes answer chosen once you click on the next
+    $("#answerblock").empty();
     // Displays questions in the #questionblock div in an array
     $("#questionblock").text(pick.question);
     for( var i = 0; i < pick.choices.length; i++) {
@@ -138,7 +151,9 @@ function displayQuestion() {
         userChoice.on("click", checkAnswer);
         $("#answerblock").append(userChoice);
     }
+    runTimer();
 }
+
 function checkAnswer () {
     // Grabs the user's answer from the array
     userGuess = parseInt($(this).attr("data-guessvalue"));
@@ -160,16 +175,22 @@ function checkAnswer () {
     if (!haveAllQuestionsBeenProcessed()) {
         $("#next-btn").show();
     }
+   
 }
 
 // When game ends.
 function showResults () {
+    
     if (haveAllQuestionsBeenProcessed()) {
         $("#questionblock").empty();
+        $("#answerblock").empty();
         $("#questionblock").text("Game Over! Here's your results: ");
         $("#answerblock").append("Correct: " + correctCount);
+        $("#answerblock").append("<br>");
         $("#answerblock").append("Incorrect: " + wrongCount);
+        $("#answerblock").append("<br>");
         $("#answerblock").append("Unanswered: " + unansweredCount);
+        $("#answerblock").append("<br>");
         $("#restart-btn").show();
         correctCount = 0;
         wrongCount = 0;
