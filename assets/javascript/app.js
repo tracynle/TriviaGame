@@ -1,10 +1,3 @@
-/* 
-To Fix:
-- after clicking next question, continue to run timer 
-- Remove the answer/results after User chooses one. (empty)
-- Create border/color highlight for each multiple choice option for readability
-- Timer is not fully set to 0 as it counts down
-*/
 var correctCount = 0;
 var wrongCount = 0;
 var unansweredCount = 0;
@@ -68,7 +61,6 @@ var restartGame = function() {
       location.reload();
     });
     $("#restart-btn").append(restart);
-
 }
 
 $(document).ready(function() {
@@ -90,7 +82,6 @@ $("#start-btn").on("click", function() {
     for(var i = 0; i < questions.length; i++) {
         holder.push(questions[i]);
     }
-
 })
 
 // runTimer:
@@ -103,16 +94,10 @@ function runTimer() {
         intervalId = setInterval(decrement, 1000);
         running = true;
     }
-
-    // player will have to click on next button to move onto next question
-    // timer will restart for every qustion.
 }
-
 function decrement() {
     timer--;
     $("#timeleft").text("Time remaining: " + timer);
-    
-
     if (timer === 0) {
         unansweredCount++;
         stopTimer();
@@ -122,12 +107,10 @@ function decrement() {
         restartGame();
     }
 }
-
 function stopTimer() {
     running = false;
     clearInterval(intervalId);
 }
-
 // Function displays the questions in a loop randomly
 function displayQuestion() {
     // Randomly show a question
@@ -153,7 +136,6 @@ function displayQuestion() {
     }
     runTimer();
 }
-
 function checkAnswer () {
     // Grabs the user's answer from the array
     userGuess = parseInt($(this).attr("data-guessvalue"));
@@ -167,7 +149,6 @@ function checkAnswer () {
     else {
         wrongCount++;
         $("#answerblock").text("Wrong! The Correct answer is: " + pick.choices[pick.answer]);
-       
     }
     userGuess= "";
     showResults();
@@ -175,12 +156,10 @@ function checkAnswer () {
     if (!haveAllQuestionsBeenProcessed()) {
         $("#next-btn").show();
     }
-   
 }
 
 // When game ends.
 function showResults () {
-    
     if (haveAllQuestionsBeenProcessed()) {
         $("#questionblock").empty();
         $("#answerblock").empty();
@@ -191,7 +170,9 @@ function showResults () {
         $("#answerblock").append("<br>");
         $("#answerblock").append("Unanswered: " + unansweredCount);
         $("#answerblock").append("<br>");
+        $("#next-btn").hide();
         $("#restart-btn").show();
+        
         correctCount = 0;
         wrongCount = 0;
         unansweredCount = 0;
@@ -201,7 +182,6 @@ function showResults () {
 function haveAllQuestionsBeenProcessed() {
     return wrongCount + correctCount + unansweredCount === qCount;
 }
-
 $("#restart-btn").on("click", function() {
     $("#restart-btn").hide();
     $("#answerblock").empty();
