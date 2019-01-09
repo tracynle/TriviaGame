@@ -27,32 +27,32 @@ var questions = [
         choices: ["in the Chamber of Secrets", "in Hagrid's house", "in the girl's bathroom above the Great Hall", "in the boy's bathroom"],
         answer: 2,
     },
-    // {
-    //     question: "How did Harry destroy Tom Riddle's diary?",
-    //     choices: ["The Sword of Gryffindor", "he pierced it with a Basilisk's fang", "he put a spell on it", "he burned the book"],
-    //     answer: 1,
-    // },
-    // {
-    //     question: "What were Ron's and Hermione's children's names?",
-    //     choices: ["Rose and Hugo", "Vanessa and Jack", "Jane and Sam", "Violet and Matthew"],
-    //     answer: 0,
-    // },
-    // {
-    //     question: "What language did Harry discover he could speak in Book 2, The Chamber of Secrets?",
-    //     choices: [" Giant", "Gobbledegook with Goblins", "Mermish with Merpeople", " Parseltongue with snakes"],
-    //     answer: 3,
-    // },
-    // {
-    //     question: "What does Lavender Brown's nickname for Ron?",
-    //     choices: ["Freckles", "Honey-bunny", " Won-won", "Snuggles"],
-    //     answer: 2,
-    // },
-    // {
-    //     question: "Which of the following is not one of Voldemort's horcruxes?",
-    //     choices: ["The Sword of Gryffindor", "Nagini", "Tom Riddle's Diary", "Helga Hufflepuff's Cup"],
-    //     answer: 0,
+    {
+        question: "How did Harry destroy Tom Riddle's diary?",
+        choices: ["The Sword of Gryffindor", "he pierced it with a Basilisk's fang", "he put a spell on it", "he burned the book"],
+        answer: 1,
+    },
+    {
+        question: "What were Ron's and Hermione's children's names?",
+        choices: ["Rose and Hugo", "Vanessa and Jack", "Jane and Sam", "Violet and Matthew"],
+        answer: 0,
+    },
+    {
+        question: "What language did Harry discover he could speak in Book 2, The Chamber of Secrets?",
+        choices: [" Giant", "Gobbledegook with Goblins", "Mermish with Merpeople", " Parseltongue with snakes"],
+        answer: 3,
+    },
+    {
+        question: "What does Lavender Brown's nickname for Ron?",
+        choices: ["Freckles", "Honey-bunny", " Won-won", "Snuggles"],
+        answer: 2,
+    },
+    {
+        question: "Which of the following is not one of Voldemort's horcruxes?",
+        choices: ["The Sword of Gryffindor", "Nagini", "Tom Riddle's Diary", "Helga Hufflepuff's Cup"],
+        answer: 0,
     
-// }
+}
 ];
 var qCount = questions.length;
 var restartGame = function() {
@@ -114,9 +114,10 @@ function stopTimer() {
 // Function displays the questions in a loop randomly
 function displayQuestion() {
     // Randomly show a question
-    // index = Math.floor(Math.random() * 1);
-    // pick = questions[index];
-    // questions.splice(index, 1);
+    /* index = Math.floor(Math.random() * 1);
+    pick = questions[index];
+    questions.splice(index, 1);
+    */
 
     // Pick a question in order
     pick = questions[index++];
