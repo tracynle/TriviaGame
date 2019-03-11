@@ -55,142 +55,142 @@ var questions = [
 }
 ];
 var qCount = questions.length;
+
 var restartGame = function() {
     // When the 'Restart' button is clicked, reload the page.
     var restart = $("#restart.btn").click(function() {
       location.reload();
     });
     $("#restart-btn").append(restart);
-}
+};
 
 $(document).ready(function() {
-console.log(questions);
 
-$("#restart-btn").hide();
-$("#next-btn").hide();
-$(".button4").hide();
-$("#next-btn").on("click", displayQuestion);
+    console.log(questions);
 
-// Game begins when you click on the 'Start' button
-$("#start-btn").on("click", function() {
-    // Once you click, the 'Start' button hides/goes away
-    $("#start-btn").hide();
-    $(".lead").empty();
-    // Calls this function to display questions in an array for loop and runs timer
-    displayQuestion();
-    runTimer();
-    for(var i = 0; i < questions.length; i++) {
-        holder.push(questions[i]);
-    }
-})
-
-// runTimer:
-//   start timer at 10
-//   decrease timer every second
-
-function runTimer() {
-    if(!running) {
-        timer = 10;
-        intervalId = setInterval(decrement, 1000);
-        running = true;
-    }
-}
-function decrement() {
-    timer--;
-    $("#timeleft").text("Time remaining: " + timer);
-    if (timer === 0) {
-        unansweredCount++;
-        stopTimer();
-        $("#answerblock").text("Time is up! The correct answer is: " + pick.choices[pick.answer]);
-        showResults();
-        $("#restart-btn").show();
-        restartGame();
-    }
-}
-function stopTimer() {
-    running = false;
-    clearInterval(intervalId);
-}
-// Function displays the questions in a loop randomly
-function displayQuestion() {
-    // Randomly show a question
-    /* index = Math.floor(Math.random() * 1);
-    pick = questions[index];
-    questions.splice(index, 1);
-    */
-
-    // Pick a question in order
-    pick = questions[index++];
-    
-    // Removes answer chosen once you click on the next
-    $("#answerblock").empty();
-    // Displays questions in the #questionblock div in an array
-    $("#questionblock").text(pick.question);
-    for( var i = 0; i < pick.choices.length; i++) {
-        var userChoice = $("<div>");
-
-        userChoice.addClass("answerchoice");
-        userChoice.text(pick.choices[i]);
-        userChoice.attr("data-guessvalue", i);
-        userChoice.on("click", checkAnswer);
-        $("#answerblock").append(userChoice);
-    }
-    runTimer();
-}
-function checkAnswer () {
-    // Grabs the user's answer from the array
-    userGuess = parseInt($(this).attr("data-guessvalue"));
-
-    stopTimer();
-    $("#answerblock").empty();
-    if (userGuess === pick.answer) {
-        correctCount++;
-        $("#answerblock").text("Correct! The correct answer is: " + pick.choices[pick.answer]);
-    }
-    else {
-        wrongCount++;
-        $("#answerblock").text("Wrong! The Correct answer is: " + pick.choices[pick.answer]);
-    }
-    userGuess= "";
-    showResults();
-
-    if (!haveAllQuestionsBeenProcessed()) {
-        $("#next-btn").show();
-    }
-}
-
-// When game ends.
-function showResults () {
-    if (haveAllQuestionsBeenProcessed()) {
-        $("#questionblock").empty();
-        $("#answerblock").empty();
-        $("#questionblock").text("Game Over! Here's your results: ");
-        $("#answerblock").append("Correct: " + correctCount);
-        $("#answerblock").append("<br>");
-        $("#answerblock").append("Incorrect: " + wrongCount);
-        $("#answerblock").append("<br>");
-        $("#answerblock").append("Unanswered: " + unansweredCount);
-        $("#answerblock").append("<br>");
-        $("#next-btn").hide();
-        $("#restart-btn").show();
-        
-        correctCount = 0;
-        wrongCount = 0;
-        unansweredCount = 0;
-    }
-}
-
-function haveAllQuestionsBeenProcessed() {
-    return wrongCount + correctCount + unansweredCount === qCount;
-}
-$("#restart-btn").on("click", function() {
     $("#restart-btn").hide();
-    $("#answerblock").empty();
-    $("#questionblock").empty();
-    for(var i = 0; i < holder.length; i++) {
-        questions.push(holder[i]);
-    }
-    runTimer();
-    displayQuestion();
-})
-})
+    $("#next-btn").hide();
+    $(".button4").hide();
+    $("#next-btn").on("click", displayQuestion);
+
+    // Game begins when you click on the 'Start' button
+    $("#start-btn").on("click", function() {
+        // Once you click, the 'Start' button hides/goes away
+        $("#start-btn").hide();
+        $(".lead").empty();
+        // Calls this function to display questions in an array for loop and runs timer
+        runTimer();
+        displayQuestion();
+        for(var i = 0; i < questions.length; i++) {
+            holder.push(questions[i]);
+        }
+    });
+
+    // runTimer:
+    function runTimer() {
+        if(!running) {
+            timer = 11;
+            intervalId = setInterval(decrement, 1000);
+            running = true;
+        }
+    };
+
+    // Timer decreases
+    function decrement() {
+        timer--;
+        $("#timeleft").text("Time remaining: " + timer);
+        if (timer === 0) {
+            unansweredCount++;
+            stopTimer();
+            $("#answerblock").text("Time is up! The correct answer is: " + pick.choices[pick.answer]);
+            showResults();
+            
+        }
+    };
+
+    function stopTimer() {
+        running = false;
+        clearInterval(intervalId);
+    };
+
+    // Function displays the questions in a loop randomly
+    function displayQuestion() {
+
+        // Pick a question in order
+        pick = questions[index++];
+        
+        // Removes answer chosen once you click on the next
+        $("#answerblock").empty();
+        // Displays questions in the #questionblock div in an array
+        $("#questionblock").text(pick.question);
+        for( var i = 0; i < pick.choices.length; i++) {
+            var userChoice = $("<div>");
+
+            userChoice.addClass("answerchoice");
+            userChoice.text(pick.choices[i]);
+            userChoice.attr("data-guessvalue", i);
+            userChoice.on("click", checkAnswer);
+            $("#answerblock").append(userChoice);
+        }
+        runTimer();
+    };
+
+    function checkAnswer () {
+        // Grabs the user's answer from the array
+        userGuess = parseInt($(this).attr("data-guessvalue"));
+
+        stopTimer();
+        $("#answerblock").empty();
+        if (userGuess === pick.answer) {
+            correctCount++;
+            $("#answerblock").text("Correct! The correct answer is: " + pick.choices[pick.answer]);
+        }
+        else {
+            wrongCount++;
+            $("#answerblock").text("Wrong! The Correct answer is: " + pick.choices[pick.answer]);
+        }
+        userGuess= "";
+        showResults();
+
+        if (!haveAllQuestionsBeenProcessed()) {
+            $("#next-btn").show();
+        }
+    
+    };
+
+    // When game ends.
+    function showResults () {
+        if (haveAllQuestionsBeenProcessed()) {
+            $("#questionblock").empty();
+            $("#answerblock").empty();
+            $("#questionblock").text("Game Over! Here's your results: ");
+            $("#answerblock").append("Correct: " + correctCount);
+            $("#answerblock").append("<br>");
+            $("#answerblock").append("Incorrect: " + wrongCount);
+            $("#answerblock").append("<br>");
+            $("#answerblock").append("Unanswered: " + unansweredCount);
+            $("#answerblock").append("<br>");
+            $("#next-btn").hide();
+            $("#restart-btn").show();
+            
+            correctCount = 0;
+            wrongCount = 0;
+            unansweredCount = 0;
+        }
+    };
+
+    function haveAllQuestionsBeenProcessed() {
+        return wrongCount + correctCount + unansweredCount === qCount;
+    };
+
+    $("#restart-btn").on("click", function() {
+        $("#restart-btn").hide();
+        $("#answerblock").empty();
+        $("#questionblock").empty();
+        for(var i = 0; i < holder.length; i++) {
+            questions.push(holder[i]);
+        }
+        runTimer();
+        displayQuestion();
+    });
+});
