@@ -11,3 +11,7 @@ Good luck!
 
 
 To play the game: [click here](https://tracynle.github.io/TriviaGame/)
+
+
+## Technology used
+HTML, CSS, Javascript, and Bootstrap
