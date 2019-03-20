@@ -104,6 +104,8 @@ $(document).ready(function() {
             stopTimer();
             $("#answerblock").text("Time is up! The correct answer is: " + pick.choices[pick.answer]);
             showResults();
+            $("#next-btn").show();
+
             
         }
     };
