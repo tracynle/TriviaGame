@@ -5,6 +5,9 @@
 body {
     background: url(../images/wizardduel.jpg);
     position: static;
+    background-repeat: no-repeat;
+    min-width: 990px;
+    
    
 }
 
